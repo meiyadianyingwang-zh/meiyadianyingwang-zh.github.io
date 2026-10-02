@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美亚电影网 - 最新电影资讯、影评与票房数据 | meiyadianyingwang-zh.github.io</title>
+<meta name="description" content="美亚电影网(meiyadianyingwang-zh.github.io)提供最新电影资讯、深度影评、票房数据、明星动态及电影节展信息，是影迷交流的一站式平台。">
+<meta name="keywords" content="美亚电影网,meiyadianyingwang-zh.github.io,电影资讯,影评,票房,电影推荐">
+<meta name="author" content="美亚电影网">
+<meta property="og:title" content="美亚电影网 - 最新电影资讯平台">
+<meta property="og:description" content="美亚电影网提供最新电影资讯、深度影评与票房数据">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meiyadianyingwang-zh.github.io">
+<link rel="canonical" href="https://meiyadianyingwang-zh.github.io">
+<style>
+/* ===== 全局重置与基础 ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a2e; --crimson:#c1121f; --crimson-dark:#780000;
+  --gold:#f4a261; --cream:#f8f0e5; --slate:#16213e;
+  --light:#e0e1dd; --white:#fff; --shadow:0 8px 30px rgba(0,0,0,.12);
+  --radius:14px; --t:all .35s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);background:var(--cream);line-height:1.7;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ===== 顶部公告 ===== */
+.top-bar{
+  background:linear-gradient(90deg,var(--crimson-dark),var(--crimson));
+  color:#fff;font-size:.85rem;text-align:center;padding:7px 15px;letter-spacing:.5px;
+}
+
+/* ===== 导航 ===== */
+.header{
+  position:sticky;top:0;z-index:999;background:rgba(26,26,46,.96);
+  backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.15);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;flex-wrap:wrap;gap:10px}
+.logo{
+  font-size:1.75rem;font-weight:900;color:#fff;letter-spacing:2px;
+  text-shadow:0 0 20px rgba(193,18,31,.5);white-space:nowrap;
+}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{
+  color:var(--light);padding:8px 16px;border-radius:25px;font-size:.95rem;
+  transition:var(--t);font-weight:500;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--crimson);color:#fff;transform:translateY(-2px)}
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.menu-toggle i{width:26px;height:2px;background:#fff;transition:var(--t);border-radius:2px}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;min-height:520px;display:flex;align-items:center;
+  background:radial-gradient(ellipse at 30% 50%,#2a1a3e 0%,var(--ink) 60%,#0d0d1a 100%);
+  overflow:hidden;padding:60px 0;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(193,18,31,.25),transparent 40%),
+    radial-gradient(circle at 15% 80%,rgba(244,162,97,.15),transparent 35%);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-inner{position:relative;z-index:2;color:#fff;text-align:center;width:100%}
+.hero-badge{
+  display:inline-block;background:rgba(193,18,31,.2);border:1px solid rgba(193,18,31,.5);
+  color:var(--gold);padding:6px 20px;border-radius:30px;font-size:.85rem;
+  margin-bottom:22px;letter-spacing:3px;text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.8rem);font-weight:900;line-height:1.2;margin-bottom:18px;
+  background:linear-gradient(135deg,#fff 30%,var(--gold) 70%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero h1 em{font-style:normal;color:var(--crimson)}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--light);max-width:650px;margin:0 auto 30px;opacity:.9}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:35px}
+.hero-stat .num{font-size:2.2rem;font-weight:900;color:var(--gold)}
+.hero-stat .label{font-size:.85rem;color:var(--light);opacity:.8}
+
+/* ===== 通用区块 ===== */
+.section{padding:70px 0}
+.section-head{text-align:center;margin-bottom:50px}
+.section-head .tag{
+  display:inline-block;color:var(--crimson);font-size:.85rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;
+}
+.section-head h2{
+  font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:var(--ink);position:relative;
+  display:inline-block;padding-bottom:14px;
+}
+.section-head h2::after{
+  content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:60px;height:4px;background:var(--crimson);border-radius:4px;
+}
+.section-head p{color:#666;margin-top:12px;font-size:.95rem}
+
+.bg-alt{background:#fff}
+.bg-dark{background:var(--slate);color:#fff}
+
+/* ===== 电影卡片 ===== */
+.grid{display:grid;gap:26px}
+.grid-4{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+
+.film-card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  transition:var(--t);position:relative;
+}
+.film-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.film-poster{
+  position:relative;height:0;padding-bottom:140%;overflow:hidden;background:var(--slate);
+}
+.film-poster .ph{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;font-weight:900;color:rgba(255,255,255,.15);
+}
+.film-poster .overlay{
+  position:absolute;inset:0;background:linear-gradient(to top,var(--slate) 0%,transparent 50%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:20px;
+}
+.film-poster .score{
+  position:absolute;top:14px;right:14px;background:var(--gold);color:#fff;
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:1.1rem;box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+.film-poster .genre{
+  color:var(--gold);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;
+}
+.film-poster h3{color:#fff;font-size:1.3rem;font-weight:800;line-height:1.3}
+.film-body{padding:18px 20px}
+.film-body .meta{display:flex;justify-content:space-between;font-size:.82rem;color:#888;margin-bottom:10px}
+.film-body .desc{font-size:.9rem;color:#555;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.film-body .read-more{
+  display:inline-block;margin-top:12px;color:var(--crimson);font-size:.85rem;font-weight:600;
+  transition:var(--t);
+}
+.film-card:hover .read-more{transform:translateX(4px)}
+
+/* 海报占位渐变 */
+.ph-1{background:linear-gradient(135deg,#1a1a2e,#c1121f)}
+.ph-2{background:linear-gradient(135deg,#16213e,#0f3460)}
+.ph-3{background:linear-gradient(135deg,#2d1b69,#11052c)}
+.ph-4{background:linear-gradient(135deg,#3a0ca3,#f72585)}
+.ph-5{background:linear-gradient(135deg,#780000,#c1121f)}
+.ph-6{background:linear-gradient(135deg,#003566,#ffd60a)}
+.ph-7{background:linear-gradient(135deg,#1b4332,#2d6a4f)}
+.ph-8{background:linear-gradient(135deg,#370617,#6a040f)}
+
+/* ===== 资讯列表 ===== */
+.news-list{display:flex;flex-direction:column;gap:0}
+.news-item{
+  display:flex;gap:22px;padding:22px 0;border-bottom:1px solid #eee;align-items:flex-start;
+  transition:var(--t);
+}
+.news-item:last-child{border-bottom:none}
+.news-item:hover{transform:translateX(6px)}
+.news-date{
+  flex-shrink:0;width:68px;text-align:center;background:var(--slate);color:#fff;
+  border-radius:10px;padding:8px 4px;
+}
+.news-date .d{font-size:1.6rem;font-weight:900;line-height:1}
+.news-date .m{font-size:.75rem;opacity:.8;margin-top:2px}
+.news-content h4{font-size:1.1rem;font-weight:700;margin-bottom:6px;transition:var(--t)}
+.news-content h4:hover{color:var(--crimson)}
+.news-content p{font-size:.88rem;color:#666;line-height:1.6}
+.news-tag{
+  display:inline-block;background:rgba(193,18,31,.1);color:var(--crimson);
+  font-size:.72rem;padding:2px 10px;border-radius:20px;margin-top:8px;font-weight:600;
+}
+
+/* ===== 票房排行 ===== */
+.chart-wrap{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.chart-row{
+  display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #f0f0f0;
+}
+.chart-row:last-child{border-bottom:none}
+.chart-rank{
+  font-size:1.5rem;font-weight:900;width:36px;text-align:center;flex-shrink:0;
+}
+.chart-rank.top{color:var(--crimson)}
+.chart-rank:nth-child(1),.chart-rank.top3{color:var(--crimson)}
+.chart-info{flex:1;min-width:0}
+.chart-info h4{font-size:1rem;font-weight:700;margin-bottom:4px}
+.chart-bar-wrap{height:6px;background:#f0f0f0;border-radius:6px;overflow:hidden;margin-top:6px}
+.chart-bar{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--crimson),var(--gold))}
+.chart-val{font-size:.9rem;font-weight:700;color:var(--slate);flex-shrink:0;white-space:nowrap}
+
+/* ===== 影评 ===== */
+.review-card{
+  background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);
+  transition:var(--t);position:relative;
+}
+.review-card::before{
+  content:""";position:absolute;top:15px;right:25px;font-size:5rem;color:rgba(193,18,31,.08);
+  font-family:Georgia,serif;line-height:1;
+}
+.review-card:hover{transform:translateY(-5px)}
+.review-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.review-avatar{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.2rem;
+}
+.av-1{background:linear-gradient(135deg,#c1121f,#f4a261)}
+.av-2{background:linear-gradient(135deg,#16213e,#3a0ca3)}
+.av-3{background:linear-gradient(135deg,#1b4332,#52b788)}
+.review-head h4{font-size:1rem;font-weight:700}
+.review-head span{font-size:.8rem;color:#999}
+.review-stars{color:var(--gold);font-size:.9rem;margin-bottom:10px;letter-spacing:2px}
+.review-card p{font-size:.92rem;color:#555;line-height:1.8}
+
+/* ===== 电影节展 ===== */
+.fest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.fest-card{
+  background:var(--ink);border-radius:var(--radius);overflow:hidden;
+  transition:var(--t);position:relative;border:1px solid rgba(255,255,255,.08);
+}
+.fest-card:hover{transform:scale(1.02);border-color:var(--crimson)}
+.fest-date{
+  background:var(--crimson);color:#fff;padding:14px 20px;font-weight:700;
+  display:flex;align-items:center;gap:10px;font-size:.9rem;
+}
+.fest-body{padding:22px}
+.fest-body h4{font-size:1.15rem;font-weight:700;margin-bottom:8px;color:#fff}
+.fest-body p{font-size:.88rem;color:#aaa;line-height:1.6}
+.fest-body .loc{color:var(--gold);font-size:.82rem;margin-top:10px;display:flex;align-items:center;gap:5px}
+
+/* ===== 数据展示 ===== */
+.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px}
+.data-box{
+  text-align:center;padding:35px 20px;border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--crimson),var(--crimson-dark));color:#fff;
+  transition:var(--t);
+}
+.data-box:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(193,18,31,.4)}
+.data-box .big{font-size:2.5rem;font-weight:900;line-height:1}
+.data-box .small{font-size:.9rem;opacity:.85;margin-top:8px}
+
+/* ===== 内页列表 ===== */
+.page-links{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.page-links ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.page-links li a{
+  display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;
+  background:#f8f0e5;transition:var(--t);font-size:.92rem;font-weight:500;
+}
+.page-links li a:hover{background:var(--crimson);color:#fff}
+.page-links li a::before{content:"▸";color:var(--crimson);font-size:.8rem;transition:var(--t)}
+.page-links li a:hover::before{color:#fff}
+
+/* ===== 底部 ===== */
+.footer{background:var(--ink);color:#aaa;padding:60px 0 30px}
+.footer-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;margin-bottom:40px}
+.footer-brand h3{color:#fff;font-size:1.5rem;margin-bottom:12px}
+.footer-brand p{font-size:.88rem;line-height:1.8}
+.footer-col h5{color:#fff;font-size:1rem;margin-bottom:16px;position:relative;padding-bottom:8px}
+.footer-col h5::after{content:"";position:absolute;bottom:0;left:0;width:30px;height:3px;background:var(--crimson);border-radius:3px}
+.footer-col ul{display:flex;flex-direction:column;gap:8px}
+.footer-col a{font-size:.88rem;transition:var(--t)}
+.footer-col a:hover{color:var(--gold);padding-left:5px}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);padding-top:24px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;font-size:.82rem;
+}
+.footer-bottom a:hover{color:#fff}
+
+/* ===== 面包屑 ===== */
+.crumb{
+  background:#fff;padding:12px 0;border-bottom:1px solid #eee;font-size:.85rem;color:#888;
+}
+.crumb a{color:#888}
+.crumb a:hover{color:var(--crimson)}
+.crumb span{margin:0 8px;color:#ccc}
+
+/* ===== 回到顶部 ===== */
+#toTop{
+  position:fixed;bottom:30px;right:30px;width:48px;height:48px;border-radius:50%;
+  background:var(--crimson);color:#fff;border:none;font-size:1.3rem;cursor:pointer;
+  box-shadow:0 4px 20px rgba(193,18,31,.4);opacity:0;visibility:hidden;
+  transition:var(--t);z-index:1000;
+}
+#toTop.show{opacity:1;visibility:visible}
+#toTop:hover{background:var(--crimson-dark);transform:translateY(-3px)}
+
+/* ===== 动画 ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.anim{opacity:0;transform:translateY(30px);transition:all .6s ease}
+.anim.in{opacity:1;transform:translateY(0)}
+
+/* ===== 响应式 ===== */
+@media(max-width:768px){
+  .container{padding:0 15px}
+  .section{padding:50px 0}
+  .menu-toggle{display:flex}
+  .nav-links{
+    display:none;width:100%;flex-direction:column;gap:5px;padding-top:15px;
+    border-top:1px solid rgba(255,255,255,.1);
+  }
+  .nav-links.active{display:flex}
+  .nav-links a{width:100%;text-align:center}
+  .hero{min-height:400px;padding:40px 0}
+  .hero-stats{gap:24px}
+  .hero-stat .num{font-size:1.7rem}
+  .news-item{flex-direction:column;gap:10px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .data-box .big{font-size:2rem}
+  .chart-wrap{padding:18px}
+  .chart-row{flex-wrap:wrap;gap:8px}
+  .chart-val{width:100%;text-align:right}
+}
+@media(max-width:480px){
+  .logo{font-size:1.3rem}
+  .top-bar{font-size:.75rem;padding:6px 10px}
+  .review-card{padding:20px}
+  .fest-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<!-- 顶部公告 -->
+<div class="top-bar">🎬 美亚电影网 · 每日更新全球电影资讯 · 最新院线动态一网打尽</div>
+
+<!-- 导航 -->
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="#top" class="logo">美亚<span>电影网</span></a>
+      <div class="menu-toggle" onclick="toggleMenu()"><i></i><i></i><i></i></div>
+      <div class="nav-links" id="navLinks">
+        <a href="#films">院线热映</a>
+        <a href="#news">电影资讯</a>
+        <a href="#boxoffice">票房排行</a>
+        <a href="#reviews">深度影评</a>
+        <a href="#festivals">电影节展</a>
+        <a href="#sitemap">网站导航</a>
+        <a href="#about">关于我们</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="hero-badge">✦ MEIYA FILM NETWORK ✦</span>
+      <h1>美亚电影网<br><em>光影世界 · 一网尽览</em></h1>
+      <p>汇聚全球最新电影资讯、权威票房数据、深度影评解析与电影节展动态，为每一位影迷打造专属的电影信息家园。</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">8,600+</div><div class="label">收录影片</div></div>
+        <div class="hero-stat"><div class="num">320万</div><div class="label">月访问用户</div></div>
+        <div class="hero-stat"><div class="num">26,000+</div><div class="label">深度影评</div></div>
+        <div class="hero-stat"><div class="num">98%</div><div class="label">用户满意度</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 院线热映 -->
+<section class="section" id="films">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Now Showing</span>
+      <h2>院线热映</h2>
+      <p>最新上映影片推荐，精彩不容错过</p>
+    </div>
+    <div class="grid grid-4">
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-1">光影</div>
+          <div class="overlay">
+            <span class="genre">科幻 · 冒险</span>
+            <h3>星际回响：黎明序曲</h3>
+          </div>
+          <div class="score">8.7</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-09-28 上映</span><span>IMAX 3D</span></div>
+          <p class="desc">一场跨越星系的文明对话，当人类探测器接收到来自猎户座旋臂的神秘信号，一场改变宇宙认知的冒险就此展开。视觉震撼与哲学思辨并存，年度科幻巨制。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-2">浮城</div>
+          <div class="overlay">
+            <span class="genre">剧情 · 悬疑</span>
+            <h3>浮城纪事</h3>
+          </div>
+          <div class="score">8.3</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-09-25 上映</span><span>2D</span></div>
+          <p class="desc">一座被江水环绕的城市，一桩二十年未破的悬案。老刑警与新记者联手追查，真相浮出水面的那一刻，所有人都始料未及。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-3">归途</div>
+          <div class="overlay">
+            <span class="genre">动画 · 家庭</span>
+            <h3>云端的归途</h3>
+          </div>
+          <div class="score">9.1</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-10-01 上映</span><span>3D动画</span></div>
+          <p class="desc">一只迷路的小鹤与孤独少年相遇，它们穿越四季风雨，踏上重返迁徙路线的旅程。画面如诗，情感真挚，献给每一个渴望归家的人。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-4">暗涌</div>
+          <div class="overlay">
+            <span class="genre">动作 · 犯罪</span>
+            <h3>暗涌</h3>
+          </div>
+          <div class="score">7.9</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-09-30 上映</span><span>IMAX 2D</span></div>
+          <p class="desc">东南亚热带海域，一艘货轮上发生的连环谜案。退役特工被迫重出江湖，在利益与道义的漩涡中寻找真相。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-5">红梅</div>
+          <div class="overlay">
+            <span class="genre">历史 · 传记</span>
+            <h3>红梅引</h3>
+          </div>
+          <div class="score">8.5</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-09-20 上映</span><span>2D</span></div>
+          <p class="desc">上世纪三十年代的上海滩，一位京剧名伶在乱世中坚守艺术信仰。梅派风华与家国情怀交织，一曲绝唱震撼人心。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-6">深海</div>
+          <div class="overlay">
+            <span class="genre">纪录片 · 自然</span>
+            <h3>深海启示录</h3>
+          </div>
+          <div class="score">8.8</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-10-05 上映</span><span>4K IMAX</span></div>
+          <p class="desc">摄制组历时四年深入马里亚纳海沟，首次拍摄到深海热泉生态系统的完整画面。每一次下潜都是对人类认知边界的拓展。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-7">春风</div>
+          <div class="overlay">
+            <span class="genre">爱情 · 青春</span>
+            <h3>春风十里</h3>
+          </div>
+          <div class="score">7.6</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-09-15 上映</span><span>2D</span></div>
+          <p class="desc">大学校园里的夏天，两个年轻人的相遇与错过。十年后重逢，那些未曾说出口的话，是否还来得及？</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+      <article class="film-card anim">
+        <div class="film-poster">
+          <div class="ph ph-8">战歌</div>
+          <div class="overlay">
+            <span class="genre">战争 · 史诗</span>
+            <h3>山河战歌</h3>
+          </div>
+          <div class="score">8.9</div>
+        </div>
+        <div class="film-body">
+          <div class="meta"><span>2026-10-08 上映</span><span>IMAX 3D</span></div>
+          <p class="desc">三大战役的恢弘再现，以普通士兵的视角还原那段波澜壮阔的历史。万人实景拍摄，每一帧都是对英雄的致敬。</p>
+          <a href="#" class="read-more">查看详情 →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 电影资讯 -->
+<section class="section bg-alt" id="news">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Film News</span>
+      <h2>电影资讯</h2>
+      <p>行业动态 · 幕后故事 · 明星专访</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="news-list anim">
+        <div class="news-item">
+          <div class="news-date"><div class="d">28</div><div class="m">09月</div></div>
+          <div class="news-content">
+            <h4><a href="#">《星际回响》首周末票房破5亿，观众口碑持续走高</a></h4>
+            <p>由国际知名导演执导的科幻巨制《星际回响：黎明序曲》上映首周末即斩获5.2亿票房，豆瓣评分稳定在8.7分，成为今年国产科幻片的现象级作品。</p>
+            <span class="news-tag">票房快讯</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="news-date"><div class="d">27</div><div class="m">09月</div></div>
+          <div class="news-content">
+            <h4><a href="#">第38届东京国际电影节公布首批入围名单</a></h4>
+            <p>本届东京国际电影节共收到来自全球78个国家和地区的1826部报名影片，中国导演新作《浮城纪事》成功入围主竞赛单元。</p>
+            <span class="news-tag">电影节展</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="news-date"><div class="d">26</div><div class="m">09月</div></div>
+          <div class="news-content">
+            <h4><a href="#">知名演员李华新片杀青，挑战多重人格角色</a></h4>
+            <p>据悉，李华在片中一人分饰三角，展现了惊人的表演跨度。该片预计2027年春节档上映，导演表示这将是一部"颠覆观众认知"的作品。</p>
+            <span class="news-tag">明星动态</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="news-date"><div class="d">25</div><div class="m">09月</div></div>
+          <div class="news-content">
+            <h4><a href="#">国产动画电影《云端的归途》票房口碑双丰收</a></h4>
+            <p>上映三天票房突破1.8亿，猫眼评分9.3，被誉为"中国动画新标杆"。影片的制作水准被认为已比肩国际一流水准。</p>
+            <span class="news-tag">票房快讯</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="news-date"><div class="d">24</div><div class="m">09月</div></div>
+          <div class="news-content">
+            <h4><a href="#">2026国庆档前瞻：七部大片激战黄金周</a></h4>
+            <p>今年国庆档共有七部新片上映，涵盖科幻、战争、动画、悬疑等多种类型，市场预测总票房有望突破45亿。</p>
+            <span class="news-tag">档期前瞻</span>
+          </div>
+        </div>
+      </div>
+      <div class="anim">
+        <div class="chart-wrap">
+          <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:20px;color:var(--ink)">📊 本周热门搜索榜</h3>
+          <div class="chart-row">
+            <div class="chart-rank top">1</div>
+            <div class="chart-info">
+              <h4>星际回响：黎明序曲</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:96%"></div></div>
+            </div>
+            <div class="chart-val">96.2万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank top">2</div>
+            <div class="chart-info">
+              <h4>云端的归途</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:88%"></div></div>
+            </div>
+            <div class="chart-val">88.5万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank top">3</div>
+            <div class="chart-info">
+              <h4>浮城纪事</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:79%"></div></div>
+            </div>
+            <div class="chart-val">79.1万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank">4</div>
+            <div class="chart-info">
+              <h4>山河战歌</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:71%"></div></div>
+            </div>
+            <div class="chart-val">71.3万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank">5</div>
+            <div class="chart-info">
+              <h4>暗涌</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:64%"></div></div>
+            </div>
+            <div class="chart-val">64.8万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank">6</div>
+            <div class="chart-info">
+              <h4>红梅引</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:58%"></div></div>
+            </div>
+            <div class="chart-val">58.6万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank">7</div>
+            <div class="chart-info">
+              <h4>春风十里</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:52%"></div></div>
+            </div>
+            <div class="chart-val">52.4万</div>
+          </div>
+          <div class="chart-row">
+            <div class="chart-rank">8</div>
+            <div class="chart-info">
+              <h4>深海启示录</h4>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width:47%"></div></div>
+            </div>
+            <div class="chart-val">47.2万</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 票房排行 -->
+<section class="section" id="boxoffice">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Box Office</span>
+      <h2>票房排行榜</h2>
+      <p>实时追踪 · 权威数据 · 市场风向标</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="chart-wrap anim">
+        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:24px;color:var(--ink);display:flex;align-items:center;gap:8px">🏆 内地票房榜（亿元）</h3>
+        <div class="chart-row">
+          <div class="chart-rank top">1</div>
+          <div class="chart-info">
+            <h4>星际回响：黎明序曲</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:100%"></div></div>
+          </div>
+          <div class="chart-val">12.68</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank top">2</div>
+          <div class="chart-info">
+            <h4>云端的归途</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:78%"></div></div>
+          </div>
+          <div class="chart-val">9.87</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank top">3</div>
+          <div class="chart-info">
+            <h4>山河战歌</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:65%"></div></div>
+          </div>
+          <div class="chart-val">8.24</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">4</div>
+          <div class="chart-info">
+            <h4>浮城纪事</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:54%"></div></div>
+          </div>
+          <div class="chart-val">6.85</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">5</div>
+          <div class="chart-info">
+            <h4>暗涌</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:43%"></div></div>
+          </div>
+          <div class="chart-val">5.42</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">6</div>
+          <div class="chart-info">
+            <h4>红梅引</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:36%"></div></div>
+          </div>
+          <div class="chart-val">4.56</div>
+        </div>
+      </div>
+      <div class="chart-wrap anim">
+        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:24px;color:var(--ink);display:flex;align-items:center;gap:8px">🌍 全球票房榜（亿美元）</h3>
+        <div class="chart-row">
+          <div class="chart-rank top">1</div>
+          <div class="chart-info">
+            <h4>Interstellar Echoes</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:100%"></div></div>
+          </div>
+          <div class="chart-val">8.92</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank top">2</div>
+          <div class="chart-info">
+            <h4>Ocean's Shadow</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:82%"></div></div>
+          </div>
+          <div class="chart-val">7.31</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank top">3</div>
+          <div class="chart-info">
+            <h4>The Last Kingdom</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:71%"></div></div>
+          </div>
+          <div class="chart-val">6.35</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">4</div>
+          <div class="chart-info">
+            <h4>Silent Waves</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:58%"></div></div>
+          </div>
+          <div class="chart-val">5.18</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">5</div>
+          <div class="chart-info">
+            <h4>Northern Lights</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:47%"></div></div>
+          </div>
+          <div class="chart-val">4.20</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-rank">6</div>
+          <div class="chart-info">
+            <h4>Desert Storm</h4>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="width:38%"></div></div>
+          </div>
+          <div class="chart-val">3.39</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 深度影评 -->
+<section class="section bg-alt" id="reviews">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Film Reviews</span>
+      <h2>深度影评</h2>
+      <p>专业视角 · 独到见解 · 不剧透的深度解读</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="review-card anim">
+        <div class="review-head">
+          <div class="review-avatar av-1">影</div>
+          <div><h4>光影捕手</h4><span>资深影评人 · 从业12年</span></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>《星际回响》不只是一封写给科幻迷的情书，更是一次对人类文明本质的哲学追问。导演在视觉奇观与情感内核之间找到了精妙的平衡点，配乐与摄影的配合堪称教科书级别。这部影片将中国科幻推向了新的高度。</p>
+      </article>
+      <article class="review-card anim">
+        <div class="review-head">
+          <div class="review-avatar av-2">墨</div>
+          <div><h4>墨白</h4><span>电影学者 · 专栏作家</span></div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p>《浮城纪事》以悬疑外壳包裹着对人性与时间的深刻思考。叙事结构精巧，双线交织中逐步揭开真相。虽节奏稍显拖沓，但结尾的反转足以弥补一切。这是今年最值得细品的国产剧情片。</p>
+      </article>
+      <article class="review-card anim">
+        <div class="review-head">
+          <div class="review-avatar av-3">森</div>
+          <div><h4>森屿</h4><span>动画研究者 · 策展人</span></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>《云端的归途》让我看到了中国动画电影的无限可能。画面每一帧都美得像油画，更难得的是情感表达克制而不煽情。它没有把观众当傻子，而是用最温柔的方式讲述最深刻的道理。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 电影节展 -->
+<section class="section bg-dark" id="festivals">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag" style="color:var(--gold)">Film Festivals</span>
+      <h2 style="color:#fff">电影节展</h2>
+      <p style="color:#aaa">全球重要电影节展日程与入围信息</p>
+    </div>
+    <div class="fest-grid">
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2026.10.15 - 10.26</div>
+        <div class="fest-body">
+          <h4>第38届东京国际电影节</h4>
+          <p>亚洲最重要的国际A类电影节之一，本届主题为"跨越边界的影像对话"，共设主竞赛、亚洲未来、日本电影视角三个单元。</p>
+          <div class="loc">📍 日本 · 东京</div>
+        </div>
+      </div>
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2026.11.03 - 11.13</div>
+        <div class="fest-body">
+          <h4>第25届金鸡百花电影节</h4>
+          <p>中国电影界最具权威性的专业奖项之一，今年移师厦门举办，届时将揭晓最佳影片、最佳导演等二十余个奖项。</p>
+          <div class="loc">📍 中国 · 厦门</div>
+        </div>
+      </div>
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2026.11.20 - 12.01</div>
+        <div class="fest-body">
+          <h4>第42届金马奖</h4>
+          <p>华语电影年度盛事，今年报名影片数量创历史新高，评审团主席由知名导演担任。</p>
+          <div class="loc">📍 中国 · 台北</div>
+        </div>
+      </div>
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2027.02.12 - 02.22</div>
+        <div class="fest-body">
+          <h4>第77届柏林国际电影节</h4>
+          <p>欧洲三大国际电影节之一，本届主竞赛单元已确认入围三部华语片，引发业界广泛关注。</p>
+          <div class="loc">📍 德国 · 柏林</div>
+        </div>
+      </div>
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2027.05.16 - 05.27</div>
+        <div class="fest-body">
+          <h4>第80届戛纳国际电影节</h4>
+          <p>世界电影艺术的巅峰舞台，今年将特别设立"亚洲新浪潮"展映单元，聚焦亚洲新生代导演作品。</p>
+          <div class="loc">📍 法国 · 戛纳</div>
+        </div>
+      </div>
+      <div class="fest-card anim">
+        <div class="fest-date">📅 2027.06.14 - 06.25</div>
+        <div class="fest-body">
+          <h4>第30届上海国际电影节</h4>
+          <p>中国唯一获得国际电影制片人协会认可的国际A类电影节，今年恰逢创办三十周年，将举办盛大庆典活动。</p>
+          <div class="loc">📍 中国 · 上海</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数据展示 -->
+<section class="section">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Platform Data</span>
+      <h2>平台实力</h2>
+      <p>美亚电影网 · 值得信赖的电影信息平台</p>
+    </div>
+    <div class="data-grid">
+      <div class="data-box anim">
+        <div class="big">8,600+</div>
+        <div class="small">影片数据库</div>
+      </div>
+      <div class="data-box anim">
+        <div class="big">26,000+</div>
+        <div class="small">深度影评</div>
+      </div>
+      <div class="data-box anim">
+        <div class="big">320万</div>
+        <div class="small">月活跃用户</div>
+      </div>
+      <div class="data-box anim">
+        <div class="big">1,200+</div>
+        <div class="small">行业合作媒体</div>
+      </div>
+      <div class="data-box anim">
+        <div class="big">98%</div>
+        <div class="small">用户满意度</div>
+      </div>
+      <div class="data-box anim">
+        <div class="big">24h</div>
+        <div class="small">实时资讯更新</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 网站导航 -->
+<section class="section bg-alt" id="sitemap">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">Site Map</span>
+      <h2>网站导航</h2>
+      <p>美亚电影网 全站内容快速入口</p>
+    </div>
+    <div class="page-links anim">
+      <ul>
+        <li><a href="#">院线热映</a></li>
+        <li><a href="#">即将上映</a></li>
+        <li><a href="#">经典回顾</a></li>
+        <li><a href="#">高分推荐</a></li>
+        <li><a href="#">电影资讯</a></li>
+        <li><a href="#">票房排行</a></li>
+        <li><a href="#">深度影评</a></li>
+        <li><a href="#">明星专访</a></li>
+        <li><a href="#">电影节展</a></li>
+        <li><a href="#">影史百科</a></li>
+        <li><a href="#">类型片单</a></li>
+        <li><a href="#">导演专题</a></li>
+        <li><a href="#">奖项追踪</a></li>
+        <li><a href="#">纪录片频道</a></li>
+        <li><a href="#">动画专栏</a></li>
+        <li><a href="#">短片推荐</a></li>
+        <li><a href="#">幕后花絮</a></li>
+        <li><a href="#">观影指南</a></li>
+        <li><a href="#">影迷社区</a></li>
+        <li><a href="#">行业数据</a></li>
+        <li><a href="#">电影榜单</a></li>
+        <li><a href="#">关于我们</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 关于我们 -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head anim">
+      <span class="tag">About Us</span>
+      <h2>关于美亚电影网</h2>
+      <p>meiyadianyingwang-zh.github.io</p>
+    </div>
+    <div class="anim" style="max-width:800px;margin:0 auto;text-align:center">
+      <p style="font-size:1.05rem;color:#555;line-height:2;margin-bottom:24px">
+        美亚电影网（meiyadianyingwang-zh.github.io）成立于2018年，是中国领先的电影信息与评论平台。我们致力于为电影爱好者提供最全面、最及时的电影资讯服务，涵盖院线动态、票房数据、深度影评、电影节展信息等内容板块。
+      </p>
+      <p style="font-size:1.05rem;color:#555;line-height:2;margin-bottom:30px">
+        平台汇聚了数百位专业影评人与行业从业者，每日更新原创内容，力求为每一位访问者呈现最真实、最有价值的电影世界。无论您是资深影迷还是偶尔观影的普通观众，美亚电影网都是您了解电影的最佳窗口。
+      </p>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+        <a href="#" style="background:var(--crimson);color:#fff;padding:12px 30px;border-radius:30px;font-weight:600;transition:var(--t)">联系我们</a>
+        <a href="#" style="background:var(--slate);color:#fff;padding:12px 30px;border-radius:30px;font-weight:600;transition:var(--t)">投稿合作</a>
+        <a href="#" style="background:var(--gold);color:#fff;padding:12px 30px;border-radius:30px;font-weight:600;transition:var(--t)">加入我们</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>🎬 美亚电影网</h3>
+        <p>光影世界，一网尽览。提供最新电影资讯、深度影评、票房数据与电影节展信息，为每一位影迷打造专属的电影信息家园。</p>
+        <p style="margin-top:12px">网址：meiyadianyingwang-zh.github.io</p>
+      </div>
+      <div class="footer-col">
+        <h5>影片频道</h5>
+        <ul>
+          <li><a href="#">院线热映</a></li>
+          <li><a href="#">即将上映</a></li>
+          <li><a href="#">高分推荐</a></li>
+          <li><a href="#">经典回顾</a></li>
+          <li><a href="#">纪录片</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>内容板块</h5>
+        <ul>
+          <li><a href="#">电影资讯</a></li>
+          <li><a href="#">深度影评</a></li>
+          <li><a href="#">票房排行</a></li>
+          <li><a href="#">明星专访</a></li>
+          <li><a href="#">电影节展</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>关于平台</h5>
+        <ul>
+          <li><a href="#">关于我们</a></li>
+          <li><a href="#">投稿合作</a></li>
+          <li><a href="#">广告服务</a></li>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">用户协议</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 美亚电影网 meiyadianyingwang-zh.github.io 版权所有</div>
+      <div>
+        <a href="#">免责声明</a> | <a href="#">网站地图</a> | <a href="#">友情链接</a> | <a href="#">RSS订阅</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button id="toTop" onclick="scrollToTop()">↑</button>
+
+<script>
+// 移动端菜单
+function toggleMenu(){
+  var nav = document.getElementById('navLinks');
+  nav.classList.toggle('active');
+}
+// 平滑滚动关闭菜单
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('navLinks').classList.remove('active');
+  });
+});
+// 回到顶部
+function scrollToTop(){
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+window.addEventListener('scroll', function(){
+  var btn = document.getElementById('toTop');
+  if(window.scrollY > 400){ btn.classList.add('show'); }
+  else { btn.classList.remove('show'); }
+});
+// 滚动动画
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+    }
+  });
+}, { threshold:0.12 });
+document.querySelectorAll('.anim').forEach(function(el){
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
